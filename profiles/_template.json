@@ -1,0 +1,15 @@
+{
+  "schema": "inspector.profile/v1",
+  "id": "template",
+  "display_name": "Local Template",
+  "targets": {
+    "chat": {"method": "POST", "url_template": "https://example.invalid/v1/chat/completions", "auth": {"mode": "header", "name": "Authorization", "credential_ref": "chat-key"}},
+    "health": {"method": "GET", "url_template": "https://example.invalid/health"}
+  },
+  "limits": {"timeout_ms": 10000, "max_body_bytes": 1048576, "concurrency": 1},
+  "capture": {"host_allowlist": ["example.invalid"]},
+  "redaction": {"pack": "secrets/v1", "unknown_policy": "block", "max_matches": 1000},
+  "mutations": [],
+  "classification": {"taxonomy": "inspector.error/v1", "rules": []},
+  "assertions": {"downgrade_is_failure": true}
+}

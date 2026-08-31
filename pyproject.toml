@@ -1,0 +1,9 @@
+[project]
+name = "gloryinspector"
+version = "0.1.0"
+description = "Local, provider-neutral evidence toolkit"
+requires-python = ">=3.11"
+dependencies = []
+
+[tool.gloryinspector]
+schema-vocabulary = "inspector.schema/v1"

@@ -1,0 +1,11 @@
+{
+  "schema": "inspector.pack/v1",
+  "id": "bundle/v1",
+  "max_bytes": 8388608,
+  "rules": [
+    {"id": "url", "pattern": "https?://[^\\s\\\"'<>]+", "priority": 5},
+    {"id": "header_name", "pattern": "\\b(?:authorization|content-type|x-[a-z0-9-]{2,})\\b", "priority": 3},
+    {"id": "tool_name", "pattern": "\\\"name\\\"\\s*:\\s*\\\"([A-Za-z][A-Za-z0-9_-]{0,63})\\\"", "priority": 4},
+    {"id": "uuid", "pattern": "\\b[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[1-5][0-9a-fA-F]{3}-[89abAB][0-9a-fA-F]{3}-[0-9a-fA-F]{12}\\b", "priority": 2}
+  ]
+}

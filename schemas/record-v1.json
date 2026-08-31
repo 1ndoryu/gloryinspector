@@ -1,0 +1,77 @@
+{
+  "schema": "inspector.schema/v1",
+  "oneOf": [
+    {
+      "type": "object",
+      "required": ["schema", "record_id", "session_id", "correlation_id", "sequence", "ts", "kind", "direction", "url", "method", "headers", "query", "body", "meta"],
+      "properties": {
+        "schema": {"const": "inspector.record/v1"},
+        "record_id": {"type": "string", "minLength": 1, "maxLength": 128},
+        "session_id": {"type": "string", "minLength": 1, "maxLength": 128},
+        "correlation_id": {"type": "string", "minLength": 1, "maxLength": 128},
+        "sequence": {"type": "integer", "minimum": 1},
+        "ts": {"type": "string", "minLength": 1, "maxLength": 64},
+        "kind": {"const": "request"},
+        "direction": {"const": "outbound"},
+        "url": {"type": "string", "minLength": 1, "maxLength": 2048},
+        "method": {"type": "string", "pattern": "^[A-Z][A-Z0-9-]{0,15}$"},
+        "headers": {"type": "object", "additionalProperties": {"type": "string", "maxLength": 4096}},
+        "query": {"type": "object", "additionalProperties": {"type": "string", "maxLength": 4096}},
+        "body_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+        "body": {
+          "oneOf": [
+            {"type": "object", "required": ["mode", "encoding", "value"], "properties": {"mode": {"const": "inline"}, "encoding": {"enum": ["json", "text", "base64"]}, "value": {}}, "additionalProperties": false},
+            {"type": "object", "required": ["mode", "path", "sha256"], "properties": {"mode": {"const": "blob"}, "path": {"type": "string", "pattern": "^blobs/[0-9a-f]{64}\\.blob$", "maxLength": 512}, "sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}}, "additionalProperties": false},
+            {"type": "object", "required": ["mode", "reason"], "properties": {"mode": {"const": "absent"}, "reason": {"type": "string", "minLength": 1, "maxLength": 256}}, "additionalProperties": false}
+          ]
+        },
+        "meta": {"type": "object", "additionalProperties": true}
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": ["schema", "record_id", "session_id", "correlation_id", "sequence", "ts", "kind", "direction", "url", "status", "headers", "body", "meta"],
+      "properties": {
+        "schema": {"const": "inspector.record/v1"},
+        "record_id": {"type": "string", "minLength": 1, "maxLength": 128},
+        "session_id": {"type": "string", "minLength": 1, "maxLength": 128},
+        "correlation_id": {"type": "string", "minLength": 1, "maxLength": 128},
+        "sequence": {"type": "integer", "minimum": 1},
+        "ts": {"type": "string", "minLength": 1, "maxLength": 64},
+        "kind": {"const": "response"},
+        "direction": {"const": "inbound"},
+        "url": {"type": "string", "minLength": 1, "maxLength": 2048},
+        "status": {"type": "integer", "minimum": 100, "maximum": 599},
+        "headers": {"type": "object", "additionalProperties": {"type": "string", "maxLength": 4096}},
+        "body_sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"},
+        "body": {
+          "oneOf": [
+            {"type": "object", "required": ["mode", "encoding", "value"], "properties": {"mode": {"const": "inline"}, "encoding": {"enum": ["json", "text", "base64"]}, "value": {}}, "additionalProperties": false},
+            {"type": "object", "required": ["mode", "path", "sha256"], "properties": {"mode": {"const": "blob"}, "path": {"type": "string", "pattern": "^blobs/[0-9a-f]{64}\\.blob$", "maxLength": 512}, "sha256": {"type": "string", "pattern": "^sha256:[0-9a-f]{64}$"}}, "additionalProperties": false},
+            {"type": "object", "required": ["mode", "reason"], "properties": {"mode": {"const": "absent"}, "reason": {"type": "string", "minLength": 1, "maxLength": 256}}, "additionalProperties": false}
+          ]
+        },
+        "meta": {"type": "object", "additionalProperties": true}
+      },
+      "additionalProperties": false
+    },
+    {
+      "type": "object",
+      "required": ["schema", "record_id", "session_id", "correlation_id", "sequence", "ts", "kind", "direction", "event_type", "meta"],
+      "properties": {
+        "schema": {"const": "inspector.record/v1"},
+        "record_id": {"type": "string", "minLength": 1, "maxLength": 128},
+        "session_id": {"type": "string", "minLength": 1, "maxLength": 128},
+        "correlation_id": {"type": "string", "minLength": 1, "maxLength": 128},
+        "sequence": {"type": "integer", "minimum": 1},
+        "ts": {"type": "string", "minLength": 1, "maxLength": 64},
+        "kind": {"const": "event"},
+        "direction": {"const": "internal"},
+        "event_type": {"type": "string", "minLength": 1, "maxLength": 128},
+        "meta": {"type": "object", "additionalProperties": true}
+      },
+      "additionalProperties": false
+    }
+  ]
+}

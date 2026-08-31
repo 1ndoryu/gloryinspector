@@ -1,0 +1,15 @@
+{
+  "schema": "inspector.record/v1",
+  "record_id": "r-000002",
+  "session_id": "s-local-0001",
+  "correlation_id": "c-0001",
+  "sequence": 2,
+  "ts": "2026-08-10T00:00:01Z",
+  "kind": "response",
+  "direction": "inbound",
+  "url": "https://example.invalid/v1/chat/completions",
+  "status": 200,
+  "headers": {"content-type": "application/json"},
+  "body": {"mode": "inline", "encoding": "json", "value": {"model": "{{model_effective}}"}},
+  "meta": {"model_requested": "{{model_requested}}", "model_effective": "{{model_effective}}"}
+}

@@ -1,0 +1,12 @@
+{
+  "schema": "inspector.profile/v1",
+  "id": "historical-case",
+  "display_name": "Synthetic historical case",
+  "targets": {"chat": {"method": "POST", "url_template": "https://example.invalid/v1/chat/completions"}},
+  "limits": {"timeout_ms": 10000, "max_body_bytes": 1048576, "concurrency": 1},
+  "capture": {"host_allowlist": ["example.invalid"]},
+  "redaction": {"pack": "secrets/v1", "unknown_policy": "block", "max_matches": 1000},
+  "mutations": [{"variable": "tool_signature", "path": "$.tools[0].signature", "variants": [{"delete": true}, "legacy", "expected-v1"]}],
+  "classification": {"taxonomy": "inspector.error/v1", "rules": []},
+  "assertions": {"downgrade_is_failure": true}
+}

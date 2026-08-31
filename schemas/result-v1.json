@@ -1,0 +1,19 @@
+{
+  "schema": "inspector.schema/v1",
+  "type": "object",
+  "required": ["schema", "status", "findings", "classification", "assertions", "trace_id", "tool_version"],
+  "properties": {
+    "schema": {"const": "inspector.result/v1"},
+    "status": {"enum": ["PASS", "WARN", "FAIL", "TOOL_ERROR", "NOT_RUN"]},
+    "findings": {"type": "array"},
+    "classification": {"type": ["string", "null"], "maxLength": 128},
+    "assertions": {"type": "array"},
+    "trace_id": {"type": ["string", "null"], "maxLength": 128},
+    "tool_version": {"type": "string", "minLength": 1, "maxLength": 64},
+    "exit_code": {"type": "integer", "minimum": 0, "maximum": 5},
+    "probe_state": {"type": "string", "enum": ["ok", "banned", "rate_limited", "token_invalid", "country_blocked", "model_locked", "ip_capped", "timeout", "unknown"]},
+    "cache_ttl_ms": {"type": "integer", "minimum": 0, "maximum": 3600000},
+    "account_alias": {"type": "string", "maxLength": 128}
+  },
+  "additionalProperties": false
+}

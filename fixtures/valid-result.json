@@ -1,0 +1,9 @@
+{
+  "schema": "inspector.result/v1",
+  "status": "PASS",
+  "findings": [],
+  "classification": null,
+  "assertions": [],
+  "trace_id": "trace-local-0001",
+  "tool_version": "0.1.0"
+}

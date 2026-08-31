@@ -1,0 +1,13 @@
+{
+  "schema": "inspector.export/v1",
+  "export_version": 1,
+  "provenance": {"fixture_id": "foreign-toolset-v1", "profile_id": "historical-case", "source": "mock", "tool_version": "0.1.0"},
+  "status": "FAIL",
+  "classification": "foreign_toolset",
+  "findings": [{"code": "foreign_toolset", "message": "synthetic tool contract rejected"}],
+  "assertions": [{"name": "model_identity", "passed": false, "message": "synthetic requested/effective model mismatch"}],
+  "trace_id": "trace-synthetic-foreign-toolset",
+  "input_sha256": null,
+  "trace_sha256": "sha256:0000000000000000000000000000000000000000000000000000000000000000",
+  "compatibility": {"contract": "gloryapi-compatibility-adapter", "supported_versions": [1]}
+}

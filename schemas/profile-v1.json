@@ -1,0 +1,67 @@
+{
+  "schema": "inspector.schema/v1",
+  "type": "object",
+  "required": ["schema", "id", "targets", "limits", "capture", "redaction", "classification", "mutations", "assertions"],
+  "properties": {
+    "schema": {"const": "inspector.profile/v1"},
+    "id": {"type": "string", "pattern": "^[a-z0-9][a-z0-9._-]{0,63}$"},
+    "display_name": {"type": "string", "maxLength": 128},
+    "targets": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "required": ["method", "url_template"],
+        "properties": {
+          "method": {"type": "string", "pattern": "^[A-Z][A-Z0-9-]{0,15}$"},
+          "url_template": {"type": "string", "pattern": "^https://[^\\s]+$", "maxLength": 2048},
+          "auth": {
+            "type": "object",
+            "required": ["mode", "name", "credential_ref"],
+            "properties": {
+              "mode": {"enum": ["header", "query"]},
+              "name": {"type": "string", "minLength": 1, "maxLength": 128},
+              "credential_ref": {"type": "string", "pattern": "^[a-zA-Z0-9._-]{1,128}$"}
+            },
+            "additionalProperties": false
+          }
+        },
+        "additionalProperties": false
+      }
+    },
+    "limits": {
+      "type": "object",
+      "required": ["timeout_ms", "max_body_bytes", "concurrency"],
+      "properties": {
+        "timeout_ms": {"type": "integer", "minimum": 1, "maximum": 60000},
+        "max_body_bytes": {"type": "integer", "minimum": 1, "maximum": 8388608},
+        "concurrency": {"const": 1}
+      },
+      "additionalProperties": false
+    },
+    "capture": {
+      "type": "object",
+      "required": ["host_allowlist"],
+      "properties": {"host_allowlist": {"type": "array", "items": {"type": "string", "minLength": 1, "maxLength": 253}}},
+      "additionalProperties": false
+    },
+    "redaction": {
+      "type": "object",
+      "required": ["pack", "unknown_policy", "max_matches"],
+      "properties": {
+        "pack": {"type": "string", "minLength": 1, "maxLength": 128},
+        "unknown_policy": {"const": "block"},
+        "max_matches": {"type": "integer", "minimum": 1, "maximum": 10000}
+      },
+      "additionalProperties": false
+    },
+    "classification": {
+      "type": "object",
+      "required": ["taxonomy", "rules"],
+      "properties": {"taxonomy": {"type": "string", "minLength": 1, "maxLength": 128}, "rules": {"type": "array"}},
+      "additionalProperties": false
+    },
+    "mutations": {"type": "array"},
+    "assertions": {"type": "object", "required": ["downgrade_is_failure"], "properties": {"downgrade_is_failure": {"type": "boolean"}}, "additionalProperties": false}
+  },
+  "additionalProperties": false
+}

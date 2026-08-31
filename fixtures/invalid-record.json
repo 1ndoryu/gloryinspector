@@ -1,0 +1,7 @@
+{
+  "schema": "inspector.record/v1",
+  "record_id": "r-invalid",
+  "kind": "request",
+  "direction": "outbound",
+  "unexpected": true
+}

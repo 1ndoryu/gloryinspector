@@ -1,0 +1,15 @@
+{
+  "base": {
+    "model": "requested-model",
+    "tools": [{"name": "weather", "signature": "legacy"}]
+  },
+  "mutation": {
+    "variable": "tool_signature",
+    "path": "$.tools[0].signature",
+    "variants": [
+      {"delete": true},
+      "legacy",
+      "expected-v1"
+    ]
+  }
+}

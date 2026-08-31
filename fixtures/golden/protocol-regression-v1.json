@@ -1,0 +1,17 @@
+{
+  "schema": "inspector.result/v1",
+  "status": "PASS",
+  "findings": [],
+  "classification": "unknown",
+  "assertions": [],
+  "trace_id": "golden-protocol-v1",
+  "tool_version": "0.1.0",
+  "observed": {
+    "schema": "inspector.result/v1",
+    "status": "PASS",
+    "classification": "unknown",
+    "model_effective": "{{model}}",
+    "stream_complete": true,
+    "latency_bucket": "lt_100ms"
+  }
+}
