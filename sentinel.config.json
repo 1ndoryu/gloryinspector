@@ -19,7 +19,10 @@
       "config": {
         "includePatterns": ["**/*.py"],
         "excludePatterns": ["**/__pycache__/**", "**/.venv/**", "**/.git/**"],
-        "directoryExceptions": [],
+        "directoryExceptions": [
+          "inspector",
+          "tests"
+        ],
         "portableBoundaries": {},
         "rules": {},
         "runtime": {
