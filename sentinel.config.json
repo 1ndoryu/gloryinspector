@@ -1,0 +1,33 @@
+{
+  "schemaVersion": 2,
+  "mode": "enforce",
+  "project": {
+    "primaryBranch": "master"
+  },
+  "guard": {
+    "directCommands": {
+      "npmScripts": [],
+      "npxTools": [],
+      "cargoSubcommands": [],
+      "tools": ["git", "python", "pip"]
+    }
+  },
+  "analyzers": {
+    "sentinel": {
+      "enabled": true,
+      "profile": "python",
+      "config": {
+        "includePatterns": ["**/*.py"],
+        "excludePatterns": ["**/__pycache__/**", "**/.venv/**", "**/.git/**"],
+        "directoryExceptions": [],
+        "portableBoundaries": {},
+        "rules": {},
+        "runtime": {
+          "minimumVersion": "",
+          "protocolVersion": 0,
+          "lockFile": ""
+        }
+      }
+    }
+  }
+}
