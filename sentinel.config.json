@@ -12,7 +12,7 @@
       "npmScripts": [],
       "npxTools": [],
       "cargoSubcommands": [],
-      "tools": ["git", "python", "pip"]
+      "tools": []
     }
   },
   "analyzers": {
